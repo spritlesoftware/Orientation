@@ -1,0 +1,32 @@
+---
+sdkversion: 4.0.0
+name: Orientation
+version: 1.0
+vendor: rhomobile
+build: debug
+bbver: 6.0
+applog: rholog.txt
+iphone:
+  configuration: Release
+  sdk: iphonesimulator5.0
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: com.rhomobile.orientation
+  BundleURLScheme: orientation
+wp:
+  productid: 07452c80-103f-0131-d2ed-001ff3d77177
+symbian:
+  uid: '0xe7e47c50'
+android:
+  version: 2.3.3
+  push:
+    sender: 704434406246
+extensions:
+- rhoconnect-client
+- screenorientation
+- coreapi
+capabilities:
+    - push
+    - vibrate 
+sdk: /Users/saradhe/.rvm/gems/ruby-1.9.3-p327@rhodeslatest/gems/rhodes-4.0.0

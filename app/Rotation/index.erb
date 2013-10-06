@@ -1,0 +1,23 @@
+
+	  <div data-role="header" data-position="inline">
+	    <h1>Screen Orientation</h1>
+	   <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+	      Home
+	    </a>
+
+	  </div>
+
+	  <div data-role="content">
+		
+	<h3>Device Rotation Methods & Push messages<h3>
+	    <ul data-role="listview">
+		<li><a href="<%= url_for :action => :left_handed_position %>" data-role="button">Rotate Left</a> </li>
+	    <li> <a href="<%= url_for :action => :right_handed_position %>" data-role="button">Rotate Right </a> </li>
+		<li><a href="<%= url_for :action => :upside_down_position %>" data-role="button">Rotate Upside down</a></li>
+	      		<li><a href="<%= url_for :action => :send_push %>" data-role="button">Push message to device</a></li>
+	    </ul>
+	  </div>
+	</div>
+
+
+

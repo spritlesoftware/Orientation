@@ -1,0 +1,26 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @rotation.input %></h1>
+    <a href="<%= url_for :action => :show, :id => @rotation.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @rotation.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @rotation.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="rotation[input]" class="fieldLabel">Input</label>
+            <input type="text" id="rotation[input]" name="rotation[input]" value="<%= @rotation.input %>" <%= placeholder( "Input" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

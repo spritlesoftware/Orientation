@@ -10923,19 +10923,19 @@ var Rho = Rho || (function ($) {
 
 
 })(Rho.jQuery, Rho, Rho.util);
-// Module Rho.Gcm
+// Module Rho.ApplePush
 
 
 (function ($, rho, rhoUtil) {
     'use strict';
 
-    var moduleNS = 'Rho.Gcm';
+    var moduleNS = 'Rho.ApplePush';
     var apiReq = rhoUtil.apiReqFor(moduleNS);
     var currentDefaultID = null;
 
-    // === Gcm class definition ===
+    // === ApplePush class definition ===
 
-    function Gcm() {
+    function ApplePush() {
         var id = null;
         this.getId = function () {return id;};
 
@@ -10951,40 +10951,65 @@ var Rho = Rho || (function ($) {
         }
     };
 
-    Gcm.getId = function() { return currentDefaultID; }
+    ApplePush.getId = function() { return currentDefaultID; }
 
-    // === Gcm instance properties ===
+    // === ApplePush instance properties ===
 
-    rhoUtil.createPropsProxy(Gcm.prototype, [
+    rhoUtil.createPropsProxy(ApplePush.prototype, [
     ], apiReq, function(){ return this.getId(); });
 
-    // === Gcm instance methods ===
+    // === ApplePush instance methods ===
 
-    rhoUtil.createMethodsProxy(Gcm.prototype, [
+    rhoUtil.createMethodsProxy(ApplePush.prototype, [
     
     ], apiReq, function(){ return this.getId(); });
 
-    // === Gcm constants ===
+    // === ApplePush constants ===
 
     
 
 
 
-    // === Gcm static properties ===
+    // === ApplePush static properties ===
 
-    rhoUtil.createPropsProxy(Gcm, [
+    rhoUtil.createPropsProxy(ApplePush, [
     ], apiReq);
 
-    // === Gcm static methods ===
+    // === ApplePush static methods ===
 
-    rhoUtil.createMethodsProxy(Gcm, [
+    rhoUtil.createMethodsProxy(ApplePush, [
     
     ], apiReq);
 
-    // === Gcm default instance support ===
+    // === ApplePush default instance support ===
     
 
-    rhoUtil.namespace(moduleNS, Gcm);
+        rhoUtil.createPropsProxy(ApplePush, [
+            { propName: 'defaultInstance:getDefault:setDefault', propAccess: 'rw', customSet: function(obj) { if(!obj || 'function' != typeof obj.getId){ throw 'Default object should provide getId method!' }; currentDefaultID = obj.getId(); } }
+          , { propName: 'defaultID:getDefaultID:setDefaultID', propAccess: 'rw', customSet: function(id) { currentDefaultID = id; } }
+        ], apiReq);
+
+        ApplePush.getId = function() {
+            if (null == currentDefaultID) {
+                currentDefaultID = ApplePush.getDefaultID();
+            }
+            return currentDefaultID;
+        }
+
+        // === ApplePush default instance properties ===
+
+        rhoUtil.createPropsProxy(ApplePush, [
+        ], apiReq, function(){ return this.getId(); });
+
+        // === ApplePush default instance methods ===
+
+        rhoUtil.createMethodsProxy(ApplePush, [
+        
+        ], apiReq, function(){ return this.getId(); });
+
+    
+
+    rhoUtil.namespace(moduleNS, ApplePush);
 
     
 

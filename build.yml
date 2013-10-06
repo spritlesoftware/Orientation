@@ -26,7 +26,8 @@ extensions:
 - rhoconnect-client
 - screenorientation
 - coreapi
+- json
 capabilities:
     - push
-    - vibrate 
+    
 sdk: /Users/saradhe/.rvm/gems/ruby-1.9.3-p327@rhodeslatest/gems/rhodes-4.0.0

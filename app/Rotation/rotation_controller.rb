@@ -1,11 +1,12 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
-
+require 'json'
 class RotationController < Rho::RhoController
   include BrowserHelper
   
   def push_callback
       Rho::Notification.showPopup(@params['msg'])
+      redirect :action => :index
   end
   
   def left_handed_position
@@ -15,11 +16,32 @@ class RotationController < Rho::RhoController
   
   def send_push
    @device_id = Rho::System.getProperty("devicePushId")
-   @server_url = {:url =>"http://192.168.1.105:3000/api/push?input=#{@device_id}" }
+   @server_url = {:url => Rho::RhoConfig.RHO_PUSH_SERVER_URL + @device_id }
    Rho::Network.get(@server_url)
-   redirect :action => :index
+   render :action => :wait
   end
-
+  
+  def login
+    refresh_app
+    @rotation = Rotation.new
+    render
+  end
+  
+  def call_reverse_web_service
+     @hash_params =  {:url => Rho::RhoConfig.RHO_REVERSE_SERVER_URL + Rho::RhoSupport.url_encode(@params['rotation']['input'])}
+      Rho::Network.get(@hash_params,url_for(:action => :reverse_callback))
+     render :action => :wait
+  end
+  
+  def reverse_callback
+    if @params["status"] != "error"
+      data = Rho::JSON.parse(@params["body"])
+      @reverse_string = data["response"]["reversed_sentence"]
+      Rho::WebView.navigate( url_for :action => :tasks, :query => { :msg => @reverse_string } )
+     else
+       Rho::Notification.showPopup("The system is unable to process your request at this time")
+     end
+  end
   
   def right_handed_position
     Rho::ScreenOrientation.rightHanded
@@ -30,17 +52,24 @@ class RotationController < Rho::RhoController
     Rho::ScreenOrientation.upsideDown
     navigate_back
   end
-  
+  def refresh_app
+    Rho::WebView.refresh
+  end
   def navigate_back
-    Rho::WebView.navigateBack
+    redirect :action => :index
   end
 
   # GET /Rotation
   def index
-    @rotations = Rotation.find(:all)
-    render :back => '/app'
+    refresh_app
+    render
   end
-
+  
+  def tasks
+    @data = @params["msg"]
+    render
+  end
+  
   # GET /Rotation/{1}
   def show
     @rotation = Rotation.find(@params['id'])

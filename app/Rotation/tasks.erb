@@ -1,7 +1,7 @@
  <div data-role="header" data-position="inline">
     <h1>Screen Orientation</h1>
    
-    <a href="<%= url_for :action => :login %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+    <a href="<%= url_for :controller => :Rotation, :action => :login %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
       Back
     </a>
 	<a href="<%= Rho::Application.startURI %>" class="ui-btn-right" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>

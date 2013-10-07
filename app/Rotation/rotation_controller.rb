@@ -15,22 +15,34 @@ class RotationController < Rho::RhoController
   end
   
   def send_push
-   @device_id = Rho::System.getProperty("devicePushId")
+   @device_id = Rho::System.getProperty("devicePushId") || ""
    @server_url = {:url => Rho::RhoConfig.RHO_PUSH_SERVER_URL + @device_id }
    Rho::Network.get(@server_url)
    render :action => :wait
   end
   
+  def helloworld
+    @rotation = Rotation.new
+    render
+  end
+  
   def login
-    refresh_app
     @rotation = Rotation.new
     render
   end
   
   def call_reverse_web_service
+  if @params &&  @params['rotation']['input']
+     if @params['rotation']['input'] == ''
+        Rho::Notification.showPopup("Please enter any words")
+      else
      @hash_params =  {:url => Rho::RhoConfig.RHO_REVERSE_SERVER_URL + Rho::RhoSupport.url_encode(@params['rotation']['input'])}
       Rho::Network.get(@hash_params,url_for(:action => :reverse_callback))
      render :action => :wait
+     end
+  else
+   navigate_back
+  end
   end
   
   def reverse_callback
@@ -52,16 +64,15 @@ class RotationController < Rho::RhoController
     Rho::ScreenOrientation.upsideDown
     navigate_back
   end
-  def refresh_app
-    Rho::WebView.refresh
-  end
+ 
   def navigate_back
     redirect :action => :index
   end
-
+  def capabilities
+    render
+  end
   # GET /Rotation
   def index
-    refresh_app
     render
   end
   

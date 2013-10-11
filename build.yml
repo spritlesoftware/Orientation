@@ -1,6 +1,6 @@
 ---
 sdkversion: 4.0.0
-name: Orientation
+name: Rhomobile Facebook App
 version: 1.0
 vendor: rhomobile
 build: debug
@@ -28,6 +28,5 @@ extensions:
 - coreapi
 - json
 capabilities:
-    - push
-    
-sdk: /Users/saradhe/.rvm/gems/ruby-1.9.3-p327@rhodeslatest/gems/rhodes-4.0.0
+- push
+sdk: D:/MotorolaRhoMobileSuite4.0.0.beta.15/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.0.0

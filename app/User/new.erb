@@ -1,7 +1,7 @@
 <div data-role="page">
 
   <div data-role="header" data-position="inline">
-    <h1>New <%= @rotation.title %></h1>
+    <h1>New <%= @user.title %></h1>
     <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
       Cancel
     </a>
@@ -9,12 +9,12 @@
 
   <div data-role="content">
     <form method="POST" action="<%= url_for :action => :create %>">
-      <input type="hidden" name="id" value="<%= @rotation.object %>"/>
+      <input type="hidden" name="id" value="<%= @user.object %>"/>
 
       
           <div data-role="fieldcontain">
-            <label for="rotation[input]" class="fieldLabel">Input</label>
-            <input type="text" id="rotation[input]" name="rotation[input]" <%= placeholder("Input") %> />
+            <label for="user[name]" class="fieldLabel">Name</label>
+            <input type="text" id="user[name]" name="user[name]" <%= placeholder("Name") %> />
           </div>
       
 

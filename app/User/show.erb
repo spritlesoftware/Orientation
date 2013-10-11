@@ -1,11 +1,11 @@
 <div data-role="page" data-add-back-btn="false">
 
   <div data-role="header" data-position="inline">
-    <h1><%= @rotation.input %></h1>
+    <h1><%= @user.name %></h1>
     <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
       Back
     </a>
-    <a href="<%= url_for :action => :edit, :id => @rotation.object %>" class="ui-btn-right" data-icon="star">
+    <a href="<%= url_for :action => :edit, :id => @user.object %>" class="ui-btn-right" data-icon="star">
       Edit
     </a>
   </div>
@@ -14,8 +14,8 @@
     <ul data-role="listview">
       
           <li>
-            <div class="itemLabel">Input</div>
-            <div class="itemValue"><%= @rotation.input %></div>
+            <div class="itemLabel">Name</div>
+            <div class="itemValue"><%= @user.name %></div>
           </li>
       
     </ul>
